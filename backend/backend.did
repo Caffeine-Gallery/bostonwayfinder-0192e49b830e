@@ -1,0 +1,30 @@
+type Properties = 
+ record {
+   description: opt text;
+   name: text;
+ };
+type Geometry = 
+ record {
+   coordinates: Coordinates;
+   typeField: text;
+ };
+type FeatureCollection = 
+ record {
+   features: vec Feature;
+   typeField: text;
+ };
+type Feature = 
+ record {
+   geometry: Geometry;
+   properties: Properties;
+   typeField: text;
+ };
+type Coordinates = vec vec float64;
+service : {
+  getBikePaths: () -> (FeatureCollection) query;
+  getRoadNetwork: () -> (FeatureCollection) query;
+  getTrainLines: () -> (FeatureCollection) query;
+  updateBikePaths: (FeatureCollection) -> ();
+  updateRoadNetwork: (FeatureCollection) -> ();
+  updateTrainLines: (FeatureCollection) -> ();
+}
